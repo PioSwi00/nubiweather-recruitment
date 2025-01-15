@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { getWeatherData } from './weatherAPI';
 import './index.css';
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 interface WeatherData {
   location: { name: string };
@@ -23,27 +25,20 @@ interface WeatherData {
   };
 }
 
-
 const WeatherApp: React.FC = () => {
   const [gliwiceWeather, setGliwiceWeather] = useState<WeatherData | null>(null);
   const [hamburgWeather, setHamburgWeather] = useState<WeatherData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
   const [activeCard, setActiveCard] = useState<string | null>(null);
-
 
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        setLoading(true);
         const gliwiceData = await getWeatherData('Gliwice');
         const hamburgData = await getWeatherData('Hamburg');
-
         setGliwiceWeather(gliwiceData);
         setHamburgWeather(hamburgData);
       } catch (error) {
-        console.error("Fetching weather error :", error);
-      } finally {
-        setLoading(false);
+        console.error("Fetching weather error: ", error);
       }
     };
 
@@ -57,45 +52,69 @@ const WeatherApp: React.FC = () => {
   const renderWeatherCard = (weatherData: WeatherData | null, locationName: string) => {
     if (!weatherData) return <p>Ładowanie...</p>;
 
+    const { location, current } = weatherData;
+    const { temp_c, condition } = current;
+    
     return (
-      <div
-        onClick={() => toggleForecast(locationName)}
-        className="weather-card"
-      >
-        <h2 className="card-title">{weatherData.location.name}</h2>
-        <p className="current-temp">Temperatura: {weatherData.current.temp_c}°C</p>
-        <p className="current-condition">{weatherData.current.condition.text}</p>
+      <div onClick={() => toggleForecast(locationName)} className="weather-card">
+        <h2 className="card-title">{location.name}</h2>
+        <p className="current-temp">Temperatura: {temp_c}°C</p>
+        <p className="current-condition">{condition.text}</p>
         <img
-          src={`https:${weatherData.current.condition.icon}`}
-          alt={weatherData.current.condition.text}
+          src={`https:${condition.icon}`}
+          alt={condition.text}
           className="current-condition-icon"
         />
       </div>
     );
   };
-
   const renderForecast = () => {
-    const weatherData = activeCard === 'Gliwice' ? gliwiceWeather : hamburgWeather;
+    const weatherData = activeCard === "Gliwice" ? gliwiceWeather : hamburgWeather;
     if (!weatherData) return null;
-  
+
+    const sliderSettings = {
+      accessibility: true,
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      responsive: [
+        { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+        { breakpoint: 600, settings: { slidesToShow: 2, slidesToScroll: 1 } },
+        { breakpoint: 480, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+      ],
+    };
+
     return (
-      <div className="forecast-horizontal">
-        {weatherData.forecast.forecastday.map((day, index) => (
-          <div key={index} className="forecast-day w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-            <p className="forecast-date">{new Date(day.date).toLocaleDateString()}</p>
-            <img
-              src={`https:${day.day.condition.icon}`}
-              alt={day.day.condition.text}
-              className="forecast-icon mb-2" 
-            />
-            <p className="forecast-temp">{day.day.avgtemp_c}°C</p>
-            <p className="forecast-condition">{day.day.condition.text}</p>
-          </div>
-        ))}
+      <div className="forecast-carousel mt-8">
+        <Slider {...sliderSettings}>
+          {weatherData.forecast.forecastday.map((day, index) => {
+            const { date, day: dayData } = day;
+            const { avgtemp_c, condition } = dayData;
+            return (
+              <div key={index} className="forecast-day p-4 bg-white shadow-md rounded-lg text-center">
+                <p className="forecast-date font-semibold text-gray-600">
+                  {new Date(date).toLocaleDateString()}
+                </p>
+                <img
+                  src={`https:${condition.icon}`}
+                  alt={condition.text}
+                  className="forecast-icon mb-4 mx-auto h-16 w-16"
+                />
+                <p className="forecast-temp text-xl font-bold text-gray-800">
+                  {avgtemp_c}°C
+                </p>
+                <p className="forecast-condition text-gray-600">
+                  {condition.text}
+                </p>
+              </div>
+            );
+          })}
+        </Slider>
       </div>
     );
   };
-  
 
   return (
     <div className="weather-app">
@@ -107,7 +126,5 @@ const WeatherApp: React.FC = () => {
     </div>
   );
 };
-
-
 
 export default WeatherApp;
