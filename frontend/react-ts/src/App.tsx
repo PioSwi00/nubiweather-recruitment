@@ -11,8 +11,8 @@ function App() {
       </div>
       <h1>NubiWeather</h1>
       <section>
-        <h2>Here's your starting point.</h2>
-        <h3>Good luck! :)</h3>
+        <h2>Place to check weather in your city</h2>
+        <h6>(only if you live in Gliwce or Hamburg)</h6>
       </section>
       <section>
       <div className="mt-8">
