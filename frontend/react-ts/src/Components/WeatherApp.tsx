@@ -29,16 +29,20 @@ const WeatherApp: React.FC = () => {
   const [gliwiceWeather, setGliwiceWeather] = useState<WeatherData | null>(null);
   const [hamburgWeather, setHamburgWeather] = useState<WeatherData | null>(null);
   const [activeCard, setActiveCard] = useState<string>("Gliwice");
+  const [isLoading, setIsLoading] = useState<boolean>(true); 
 
   useEffect(() => {
     const fetchWeather = async () => {
       try {
+        setIsLoading(true); 
         const gliwiceData = await getWeatherData('Gliwice');
         const hamburgData = await getWeatherData('Hamburg');
         setGliwiceWeather(gliwiceData);
         setHamburgWeather(hamburgData);
       } catch (error) {
         console.error("Fetching weather error: ", error);
+      } finally {
+        setIsLoading(false); 
       }
     };
 
@@ -116,6 +120,15 @@ const WeatherApp: React.FC = () => {
       </div>
     );
   };
+
+  if (isLoading) {
+    return (
+      <div className="loading-screen">
+        <div className="spinner"></div>
+        <p>Ładowanie...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="weather-app">
