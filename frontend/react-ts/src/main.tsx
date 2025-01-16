@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import App from './App.tsx'
-import WeatherApp from './WeatherApp.tsx'
-import HomeButton from './homebutton.tsx'
+import WeatherApp from './Components/WeatherApp.tsx'
+import HomeButton from './Components/homebutton.tsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

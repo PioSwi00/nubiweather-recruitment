@@ -9,7 +9,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,19 +20,22 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
 body {
   margin: 0;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   background-color: #242424;
   overflow-x: hidden;
   padding: 0; 
+  background: linear-gradient(330deg, #a739d2f9,#d8db5d); 
 }
 
 @media (min-width: 1024px) {
   body {
-    padding: 20vh; 
+    padding: 20vh;
   }
 }
+
 #app {
   max-width: 1280px;
   padding: 2rem;
@@ -42,62 +44,91 @@ body {
   box-sizing: border-box;
 }
 
+.start {
+  background-color: #242424;
+  padding: 100px;
+}
+.but{
+  border: 1px solid #666464;
+ 
+}
+.but:hover{
+  border: 1px solid#4464cc;
+  background: linear-gradient(180deg, #a739d2f9,#d8db5d);
+}
 /* =================================================================*/
 /*                             Weather                              */
 /* =================================================================*/
 
 .weather-app {
   font-family: 'Inter', Arial, sans-serif;
-  color: #ffffff;
-  background-color: #1a1a1a;
+  color: #242424;
   padding: 20px;
+  border-radius: 10px;
+  background: rgba(125, 160, 175, 0);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.2px);
+  -webkit-backdrop-filter: blur(6.2px);
+  border: 1px solid rgba(0, 0, 0, 0.31);
 }
 
 .weather-cards-container {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
   margin-bottom: 20px;
-  max-width: 100%; 
-  overflow: hidden; 
+  max-width: 100%;
+  overflow: visible;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .weather-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  color: #242424;
-  border-radius: 10px;
-  padding: 20px;
-  width: 280px; 
+  background: linear-gradient(145deg, #6e7cfd, #829ef8); 
+  color: #ffffff;
+  border-radius: 22px; 
+  padding: 1.5rem; 
+  width: 280px;
   text-align: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
 .weather-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); 
 }
 
 .card-title {
   font-size: 1.8rem;
-  color: #ffffff;
+  color: #ffffff; 
   font-weight: 600;
   margin-bottom: 10px;
 }
 
 .current-temp {
   font-size: 1.4rem;
-  color: #ffffff;
+  color: #ffffff; 
   font-weight: 500;
   margin-bottom: 5px;
 }
 
 .current-condition {
   font-size: 1.2rem;
-  color: #d3d3d3;
+  color: #ffffff; 
 }
+
+.current-condition-icon {
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
+}
+/* =================================================================*/
+/*                             Forecast                             */
+/* =================================================================*/
 
 .forecast-horizontal {
   display: flex;
@@ -108,20 +139,21 @@ body {
 }
 
 .forecast-day {
-  background: rgba(93, 163, 229, 0.657);
+  background: linear-gradient(145deg,  #4464cc,#2a3279); 
   border-radius: 10px;
   padding: 20px;
-  width: 200px; 
+  width: 200px;
   text-align: center;
   margin-bottom: 20px;
   box-sizing: border-box;
   transition: transform 0.3s ease;
   cursor: pointer;
   color: #ffffff;
+  overflow: visible;
 }
 
 .forecast-day:hover {
-  transform: translateY(-5px);
+  transform: translateY(5px);
 }
 
 .forecast-date {
@@ -129,12 +161,6 @@ body {
   font-weight: 500;
   margin-bottom: 5px;
   color: #ffffff;
-}
-
-.current-condition-icon {
-  width: 40px;
-  height: 40px;
-  margin-top: 10px;
 }
 
 .forecast-icon {
@@ -153,6 +179,9 @@ body {
   font-size: 0.9rem;
   color: #d3d3d3;
 }
+/* =================================================================*/
+/*                            Karuzela                              */
+/* =================================================================*/
 
 .slick-slide > div {
   margin: 0 10px;

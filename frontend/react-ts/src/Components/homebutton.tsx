@@ -1,11 +1,10 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 const HomeButton = () => {
   return (
     <div className="fixed top-4 left-4 z-50">
       <Link to="/">
-        <div className="bg-blue-500 p-4 rounded-full shadow-lg hover:bg-blue-600 transition">
+        <div className="but p-4 rounded-full ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="white"

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getWeatherData } from './weatherAPI';
-import './index.css';
+import { getWeatherData } from '../weatherAPI';
+import '../index.css';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -28,7 +28,7 @@ interface WeatherData {
 const WeatherApp: React.FC = () => {
   const [gliwiceWeather, setGliwiceWeather] = useState<WeatherData | null>(null);
   const [hamburgWeather, setHamburgWeather] = useState<WeatherData | null>(null);
-  const [activeCard, setActiveCard] = useState<string | null>(null);
+  const [activeCard, setActiveCard] = useState<string>("Gliwice");
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -46,7 +46,7 @@ const WeatherApp: React.FC = () => {
   }, []);
 
   const toggleForecast = (locationName: string) => {
-    setActiveCard((prev) => (prev === locationName ? null : locationName));
+    setActiveCard(locationName);
   };
 
   const renderWeatherCard = (weatherData: WeatherData | null, locationName: string) => {
@@ -58,7 +58,7 @@ const WeatherApp: React.FC = () => {
     return (
       <div onClick={() => toggleForecast(locationName)} className="weather-card">
         <h2 className="card-title">{location.name}</h2>
-        <p className="current-temp">Temperatura: {temp_c}°C</p>
+        <p className="current-temp">{temp_c}°C</p>
         <p className="current-condition">{condition.text}</p>
         <img
           src={`https:${condition.icon}`}
@@ -68,6 +68,7 @@ const WeatherApp: React.FC = () => {
       </div>
     );
   };
+
   const renderForecast = () => {
     const weatherData = activeCard === "Gliwice" ? gliwiceWeather : hamburgWeather;
     if (!weatherData) return null;
@@ -122,7 +123,12 @@ const WeatherApp: React.FC = () => {
         {renderWeatherCard(gliwiceWeather, "Gliwice")}
         {renderWeatherCard(hamburgWeather, "Hamburg")}
       </div>
-      {activeCard && renderForecast()}
+      <section className="forecast-title text-center mt-6">
+        <h2 className="text-2xl font-bold text-gray-800">
+          Pogoda na najbliższe 7 dni w <span className="text-blue-600">{activeCard}</span>
+        </h2>
+      </section>
+      {renderForecast()}
     </div>
   );
 };
