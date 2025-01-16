@@ -70,7 +70,7 @@ Aplikacja korzysta z API [WeatherAPI](https://www.weatherapi.com/) do pobierania
 
 ### 5. Skonfiguruj klucz API
 
-```
+
 
 Zastąp `twój_klucz_api` swoim rzeczywistym kluczem API z WeatherAPI. Bądź skorzystaj z aktualnego.
 
