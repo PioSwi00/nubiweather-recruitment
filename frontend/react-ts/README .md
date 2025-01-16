@@ -81,7 +81,7 @@ Zastąp `twój_klucz_api` swoim rzeczywistym kluczem API z WeatherAPI. Bądź sk
 Po otwarciu aplikacji zobaczysz:
 - Stronę główną z linkiem do prognozy
 - Bieżącą pogodę oraz prognozę na 7 dni dla **Gliwic** i **Hamburga** (aplikacja obsługuje tylko te dwa miasta).
-- Karuzelę z prognozą pogody na 7 dni dla każdego miasta.
+- Karuzelę z prognozą pogody na 7 dni dla każdego miasta wykonaną przy poomocy react-slick.
 - Przycisk, który przekierowuje Cię z ekranu głównego do szczegółów pogody.
 
 Dane pogodowe obejmują:
@@ -120,4 +120,4 @@ Projekt jest dostępny na licencji MIT – zobacz plik [LICENSE](LICENSE) dla sz
 
 ---
 
-Czuj się swobodnie, aby skontaktować się w razie pytań lub sugestii dotyczących tego projektu!
+Mam nadzieję iż aplikacja sie spodoba, jeżeli nie zawsze jest to wartościowa nauka dla mnie.
